@@ -1,0 +1,280 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  @font-face{
+    font-family: FinkHeavy;
+    src: url("/fonts/FinkHeavy.ttf") format('ttf');
+  }
+  
+  body {
+    height: 100vh;
+    display: flex;
+    /*background: #060AB2;*/
+    background-image: url("img/background1.jpg");
+    /* font-family: 'Alex Brush', cursive !important; */
+  }
+
+
+  .page    { display: none; padding: 0 0.5em; }
+  .page h1 { font-size: 2em; line-height: 1em; margin-top: 1.1em; font-weight: bold; }
+  .page p  { font-size: 1.5em; line-height: 1.275em; margin-top: 0.15em; }
+    
+  #loading {width: 100%;height: 100%;top: 0px;left: 0px;position: fixed;display: block; z-index: 99}
+
+  #loading-image {position: absolute;top: 40%;left: 45%;z-index: 100} 
+
+  .memory-game {
+    width: 900px;
+    height: 800px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+  }
+
+  .menu-class {
+    width: 900px;
+    height: 800px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    display: none;
+  }
+  
+  .memory-card {
+    /* width: calc(16.666% - 10px);
+    height: calc(25% - 10px); */
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  }
+
+  /* 3 -> 33.333
+     4 -> 25
+     5 -> 20
+     6 -> 16.666 
+
+
+     1: 12 cards 3*4
+     2: 16 -- 4*4
+     3: 20 -- 4*5
+     4: 24 -- 4*6
+
+
+   */
+
+  .level1 { /* 12 cards: 4 * 3  */
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+  }
+
+  .level2 { /* 16 cards: 4 * 4  */
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+  }
+
+  .level3 { /* 20 cards: 5 * 4  */
+    width: calc(20% - 10px);
+    height: calc(25% - 10px);
+  }
+
+  .level4 { /* 24 cards: 6 * 4  */
+    width: calc(16.666% - 10px);
+    height: calc(25% - 10px);
+  }
+
+  .memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+  }
+  
+  .memory-card.flip {
+    transform: rotateY(180deg);
+  }
+  
+  .front-face,
+  .back-face {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: absolute;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    backface-visibility: hidden;
+  }
+  
+  .front-face {
+    transform: rotateY(180deg);
+  }
+
+  .menu-button {
+    
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    line-height: 60px;
+    font-weight: bold;
+    padding: 0 40px;
+    border-radius: 5px;
+    /* background: rgb(114, 250, 216); */
+  }
+  
+  #isabelle{
+    -webkit-filter: drop-shadow(5px 3px 0 white) drop-shadow(-px -1px 0 white);
+    filter:drop-shadow(5px 3px 0 white) drop-shadow(-1px -1px 0 white);
+  }
+
+  #counter, #counterLabel, #showlevel{
+    /* background-color: rgba(11, 31, 24, 0.541);
+    font-family: 'FinkHeavy';  */
+    
+    font-size: 40px;
+
+  }
+
+  #counter, #counterLabel {
+      display: inline;
+  }
+  
+  #section{
+    height: 900px;
+    background-color: rgba(0, 128, 128, 0.829);
+    opacity: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+
+/* Barra de navegação superior */
+
+.topnav{
+  overflow: hidden;
+  background-color:rgba(133, 197, 197, 0.829);
+  width: 900px;
+  height: 100px;
+  overflow: auto;
+  font-size: 16px;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  /* text-align: center; */
+  /* padding: 15px 16px;  */
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 16px;
+  width: 33.333%;
+  
+}
+
+#kkimage {
+  padding: 10px 16px;
+}
+
+/* .topnav a:hover {
+  background-color: #ddd;
+  color: black;
+} */
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#playAudio {
+  width: 80px;
+  height: 80px;
+}
+
+/* --------------------- Modal -------------------- /*
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #f5ecc5;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 75%;
+  height: 75%;
+  font-size: 40px;
+  text-align: center;
+  /* vertical-align: middle; */
+  border-radius: 20px;
+
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#imgModal {
+  padding-top: 50px;
+  vertical-align: center;
+  width: 90%;
+  
+}
+
+#btn-modal {
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgb(97, 190, 147);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4pxpx #999;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+}
+
+#btn-modal:hover {background-color: rgb(133, 216, 177);}
+
+#btn-modal:active {
+  background-color: rgb(74, 177, 129) ;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* ------------------------------------------------------ */
+
+ 
