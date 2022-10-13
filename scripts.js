@@ -21,6 +21,7 @@ function setVisible(selector, visible) {
   document.querySelector(selector).style.display = visible ? 'block' : 'none';
 }
 
+//Função para aparecer nivel concluido
 function modalLevelEnd(level) {
   divModal = document.createElement("div");
   divModal.id = "myModal";
@@ -83,7 +84,11 @@ function removeModal(level) {
 
   //inicia tela do próximo nível
   level = level + 1;
+  if (level == 5 ){
+    location.reload() /* Ao chegar no nivel 5 a pagína irá recarregar*/
+    }
   gameScene(level);
+  
 
 }
 
@@ -317,6 +322,7 @@ function gameScene(level) {
       //TODO: adicionar mensagem de nível concluído
 
       modalLevelEnd(level)
+      
 
       //remove cartas do nível atual
       // const elements = document.getElementsByClassName(strLevel);
